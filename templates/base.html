@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Excel Learning</title>
+    <style>
+        body{
+            font-family: Tahoma;
+            margin: 0;
+            background: #f2f2f2;
+        }
+
+        .navbar{
+            background: green;
+            padding: 15px;
+        }
+
+        .navbar a{
+            color: white;
+            margin-right: 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container{
+            width: 80%;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <a href="/">หน้าแรก</a>
+    <a href="/lesson1">บท 1</a>
+    <a href="/lesson2">บท 2</a>
+    <a href="/lesson3">บท 3</a>
+    <a href="/lesson4">บท 4</a>
+    <a href="/lesson5">บท 5</a>
+    <a href="/lesson6">บท 6</a>
+</div>
+
+<div class="container">
+    {% block content %}{% endblock %}
+</div>
+
+</body>
+</html>
