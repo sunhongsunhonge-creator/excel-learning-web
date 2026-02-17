@@ -1,4 +1,4 @@
-from flask import Flask, render_template 
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -29,6 +29,30 @@ def lesson5():
 @app.route('/lesson6')
 def lesson6():
     return render_template('lesson6.html')
+
+@app.route("/quiz1")
+def quiz1():
+    return render_template("quiz1.html")
+
+@app.route("/quiz2")
+def quiz2():
+    return render_template("quiz2.html")
+
+@app.route("/quiz3")
+def quiz3():
+    return render_template("quiz3.html")
+
+@app.route("/quiz4")
+def quiz4():
+    return render_template("quiz4.html")
+
+@app.route("/quiz5")
+def quiz5():
+    return render_template("quiz5.html")
+
+@app.route("/quiz6")
+def quiz6():
+    return render_template("quiz6.html")
 
 import os
 if __name__ == "__main__":

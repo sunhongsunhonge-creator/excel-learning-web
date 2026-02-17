@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 style="text-align:center;">
+แบบทดสอบท้ายบทที่ 1 : ความรู้เบื้องต้นเกี่ยวกับ Excel
+</h1>
+
+<hr>
+
+<form id="quizForm">
+
+<h3>ข้อ 1: โปรแกรม Excel เป็นโปรแกรมประเภทใด?</h3>
+<input type="radio" name="q1" value="0"> Word Processing<br>
+<input type="radio" name="q1" value="1"> Spreadsheet<br>
+<input type="radio" name="q1" value="0"> Presentation<br>
+<input type="radio" name="q1" value="0"> Database<br>
+
+<hr>
+
+<h3>ข้อ 2: จุดตัดของแถวและคอลัมน์เรียกว่าอะไร?</h3>
+<input type="radio" name="q2" value="1"> Cell<br>
+<input type="radio" name="q2" value="0"> Row<br>
+<input type="radio" name="q2" value="0"> Column<br>
+<input type="radio" name="q2" value="0"> Table<br>
+
+<hr>
+
+<h3>ข้อ 3: คอลัมน์ใน Excel แสดงเป็นอะไร?</h3>
+<input type="radio" name="q3" value="0"> ตัวเลข<br>
+<input type="radio" name="q3" value="1"> ตัวอักษร<br>
+<input type="radio" name="q3" value="0"> สัญลักษณ์<br>
+<input type="radio" name="q3" value="0"> เครื่องหมาย<br>
+
+<hr>
+
+<h3>ข้อ 4: แถวใน Excel แสดงเป็นอะไร?</h3>
+<input type="radio" name="q4" value="1"> ตัวเลข<br>
+<input type="radio" name="q4" value="0"> ตัวอักษร<br>
+<input type="radio" name="q4" value="0"> สี<br>
+<input type="radio" name="q4" value="0"> รูปภาพ<br>
+
+<hr>
+
+<h3>ข้อ 5: Excel นิยมใช้ในงานประเภทใด?</h3>
+<input type="radio" name="q5" value="1"> งานบัญชีและจัดการข้อมูล<br>
+<input type="radio" name="q5" value="0"> ตัดต่อวิดีโอ<br>
+<input type="radio" name="q5" value="0"> วาดภาพ 3 มิติ<br>
+<input type="radio" name="q5" value="0"> เขียนโปรแกรมเกม<br>
+
+<br><br>
+
+<button type="button" onclick="checkScore()"
+style="padding:10px 20px; font-size:16px;">
+ตรวจคำตอบ
+</button>
+
+</form>
+
+<h2 id="result" style="margin-top:20px;"></h2>
+
+<br>
+<a href="/">⬅ กลับหน้าแรก</a>
+
+<script>
+function checkScore() {
+    let score = 0;
+    let form = document.forms["quizForm"];
+
+    for (let i = 1; i <= 5; i++) {
+        let q = form["q" + i];
+        for (let j = 0; j < q.length; j++) {
+            if (q[j].checked) {
+                score += parseInt(q[j].value);
+            }
+        }
+    }
+
+    document.getElementById("result").innerHTML =
+        "คะแนนที่ได้: " + score + " / 5";
+}
+</script>
+
+{% endblock %}

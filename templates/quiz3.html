@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Quiz 3</h2>
+
+<form id="quizForm">
+
+<h3>ข้อ 1: Python ใช้คำสั่งอะไรแสดงผล?</h3>
+<input type="radio" name="q1" value="1"> print()<br>
+<input type="radio" name="q1" value="0"> echo()<br>
+<input type="radio" name="q1" value="0"> display()<br>
+
+<h3>ข้อ 2: Flask เป็นภาษาอะไร?</h3>
+<input type="radio" name="q2" value="0"> Java<br>
+<input type="radio" name="q2" value="1"> Python<br>
+<input type="radio" name="q2" value="0"> C++<br>
+
+<h3>ข้อ 3: คำสั่งรับข้อมูลจาก form คืออะไร?</h3>
+<input type="radio" name="q3" value="0"> request.data<br>
+<input type="radio" name="q3" value="0"> request.input<br>
+<input type="radio" name="q3" value="1"> request.form<br>
+
+<br><br>
+
+<button type="button" onclick="checkScore()">
+ตรวจคำตอบ
+</button>
+
+</form>
+
+<h2 id="result" style="margin-top:20px;"></h2>
+
+<script>
+function checkScore() {
+    let score = 0;
+    let form = document.forms["quizForm"];
+
+    for (let i = 1; i <= 3; i++) {
+        let q = form["q" + i];
+        for (let j = 0; j < q.length; j++) {
+            if (q[j].checked) {
+                score += parseInt(q[j].value);
+            }
+        }
+    }
+
+    document.getElementById("result").innerHTML =
+        "คะแนนที่ได้: " + score + " / 3";
+}
+</script>
+
+{% endblock %}
