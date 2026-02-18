@@ -8,7 +8,7 @@
 
 <hr>
 
-<form id="quizForm">
+<form id="quizForm" name="quizForm" class="card p-4 shadow-sm">
 
 <h3>ข้อ 1: โปรแกรม Excel เป็นโปรแกรมประเภทใด?</h3>
 <input type="radio" name="q1" value="0"> Word Processing<br>
@@ -50,10 +50,7 @@
 
 <br><br>
 
-<button type="button" onclick="checkScore()"
-style="padding:10px 20px; font-size:16px;">
-ตรวจคำตอบ
-</button>
+<button type="button" class="btn btn-success mt-3" onclick="checkScore()">ตรวจคำตอบ</button>
 
 </form>
 

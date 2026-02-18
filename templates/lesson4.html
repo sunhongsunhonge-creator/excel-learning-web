@@ -1,4 +1,10 @@
-<h1 style="text-align:center;">
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card p-4 shadow-sm">
+
+<h1 class="text-center mb-4">
 บทที่ 4 : การใช้ฟังก์ชันเงื่อนไข (IF Function)
 </h1>
 
@@ -85,4 +91,6 @@
 ซึ่งใช้สำหรับกำหนดเงื่อนไขและตัดสินผลลัพธ์
 รวมถึงการประยุกต์ใช้งานในสถานการณ์ต่าง ๆ
 ฟังก์ชัน IF ถือเป็นพื้นฐานสำคัญของการวิเคราะห์ข้อมูลใน Excel
-</p>
+</div>
+
+{% endblock %}

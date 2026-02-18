@@ -1,57 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="th">
 <head>
-    <title>Excel Learning</title>
-    <style>
-        body{
-            font-family: Tahoma;
-            margin: 0;
-            background: #f2f2f2;
-        }
+<meta charset="UTF-8">
+<title>Excel Learning</title>
 
-        .navbar{
-            background: green;
-            padding: 15px;
-        }
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-        .navbar a{
-            color: white;
-            margin-right: 20px;
-            text-decoration: none;
-            font-weight: bold;
-        }
+<style>
+body {
+    background-color: #f4f6f9;
+}
+.navbar {
+    background: linear-gradient(to right, #1d976c, #93f9b9);
+}
+.navbar a {
+    color: white !important;
+    font-weight: 500;
+}
+.card:hover {
+    transform: scale(1.03);
+    transition: 0.3s;
+}
+footer {
+    margin-top: 50px;
+    padding: 15px;
+    text-align: center;
+    background: #ffffff;
+    border-top: 1px solid #ddd;
+}
+</style>
 
-        .container{
-            width: 80%;
-            margin: auto;
-            background: white;
-            padding: 30px;
-            margin-top: 30px;
-        }
-    </style>
 </head>
+
 <body>
 
-<div class="navbar">
-    <a href="/">หน้าแรก</a>
-    <a href="/lesson1">บท 1</a>
-    <a href="/lesson2">บท 2</a>
-    <a href="/lesson3">บท 3</a>
-    <a href="/lesson4">บท 4</a>
-    <a href="/lesson5">บท 5</a>
-    <a href="/lesson6">บท 6</a>
-    <a href="/quiz1">Quiz 1</a>
-    <a href="/quiz2">Quiz 2</a>
-    <a href="/quiz3">Quiz 3</a>
-    <a href="/quiz4">Quiz 4</a>
-    <a href="/quiz5">Quiz 5</a>
-    <a href="/quiz6">Quiz 6</a>
+<nav class="navbar navbar-expand-lg navbar-dark">
+<div class="container">
+<a class="navbar-brand" href="/">Excel Learning</a>
+<div>
+<a class="nav-link d-inline" href="/lesson1">บท 1</a>
+<a class="nav-link d-inline" href="/lesson2">บท 2</a>
+<a class="nav-link d-inline" href="/lesson3">บท 3</a>
+<a class="nav-link d-inline" href="/lesson4">บท 4</a>
+<a class="nav-link d-inline" href="/lesson5">บท 5</a>
+<a class="nav-link d-inline" href="/lesson6">บท 6</a>
+<a class="nav-link d-inline" href="/quiz1">Quiz 1</a>
+<a class="nav-link d-inline" href="/quiz2">Quiz 2</a>
+<a class="nav-link d-inline" href="/quiz3">Quiz 3</a>
+<a class="nav-link d-inline" href="/quiz4">Quiz 4</a>
+<a class="nav-link d-inline" href="/quiz5">Quiz 5</a>
+<a class="nav-link d-inline" href="/quiz6">Quiz 6</a>
+</div>
+</div>
+</nav>
+
+<div class="container mt-4">
+{% block content %}
+{% endblock %}
 </div>
 
-<div class="container">
-     {% block content %}
-     {% endblock %}
-</div>
+<footer>
+© 2026 Excel Learning Project | พัฒนาโดยsititchokเเละคณะ
+</footer>
 
 </body>
 </html>

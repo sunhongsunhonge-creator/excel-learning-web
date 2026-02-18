@@ -1,34 +1,19 @@
 {% extends "base.html" %}
-
 {% block content %}
 
-<h2 style="text-align:center;">📚 Dashboard แบบทดสอบ Excel</h2>
+<h1 class="text-center mb-4">📊 ระบบเรียนรู้ Excel Online</h1>
 
-<div style="text-align:center; margin-top:30px;">
+<div class="row">
 
-    <a href="/quiz1">
-        <button style="padding:10px 20px; margin:10px;">บทที่ 1</button>
-    </a>
-
-    <a href="/quiz2">
-        <button style="padding:10px 20px; margin:10px;">บทที่ 2</button>
-    </a>
-
-    <a href="/quiz3">
-        <button style="padding:10px 20px; margin:10px;">บทที่ 3</button>
-    </a>
-
-    <a href="/quiz4">
-        <button style="padding:10px 20px; margin:10px;">บทที่ 4</button>
-    </a>
-
-    <a href="/quiz5">
-        <button style="padding:10px 20px; margin:10px;">บทที่ 5</button>
-    </a>
-
-    <a href="/quiz6">
-        <button style="padding:10px 20px; margin:10px;">บทที่ 6</button>
-    </a>
+{% for i in range(1,7) %}
+<div class="col-md-4 mb-3">
+    <div class="card shadow-sm text-center p-3">
+        <h5>บทเรียนที่ {{ i }}</h5>
+        <a href="/lesson{{ i }}" class="btn btn-primary mt-2">เข้าเรียน</a>
+        <a href="/quiz{{ i }}" class="btn btn-success mt-2">ทำแบบทดสอบ</a>
+    </div>
+</div>
+{% endfor %}
 
 </div>
 
