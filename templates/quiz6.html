@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>แบบทดสอบท้ายบทที่ 6 : การจัดการข้อมูลใน Excel</h2>
+
+<form id="quizForm" name="quizForm">
+
+<p>ข้อ 1: การเรียงข้อมูลจากน้อยไปมากเรียกว่าอะไร?</p>
+<input type="radio" name="q1" value="1"> Sort A to Z<br>
+<input type="radio" name="q1" value="0"> Filter<br>
+<input type="radio" name="q1" value="0"> Freeze Pane<br>
+<hr>
+
+<p>ข้อ 2: การกรองข้อมูลใช้คำสั่งใด?</p>
+<input type="radio" name="q2" value="0"> Sort<br>
+<input type="radio" name="q2" value="1"> Filter<br>
+<input type="radio" name="q2" value="0"> Merge<br>
+<hr>
+
+<p>ข้อ 3: การตรึงแถวบนสุดใช้คำสั่งใด?</p>
+<input type="radio" name="q3" value="1"> Freeze Top Row<br>
+<input type="radio" name="q3" value="0"> Wrap Text<br>
+<input type="radio" name="q3" value="0"> Split Cell<br>
+<hr>
+
+<p>ข้อ 4: การซ่อนคอลัมน์ใช้คำสั่งใด?</p>
+<input type="radio" name="q4" value="1"> Hide<br>
+<input type="radio" name="q4" value="0"> Delete<br>
+<input type="radio" name="q4" value="0"> Rename<br>
+<hr>
+
+<p>ข้อ 5: การแสดงคอลัมน์ที่ซ่อนไว้ใช้คำสั่งใด?</p>
+<input type="radio" name="q5" value="1"> Unhide<br>
+<input type="radio" name="q5" value="0"> Hide<br>
+<input type="radio" name="q5" value="0"> Lock<br>
+
+<br><br>
+<button type="button" onclick="checkScore()">ตรวจคำตอบ</button>
+
+</form>
+
+<h2 id="result"></h2>
+
+<script>
+function checkScore() {
+    let score = 0;
+    let form = document.getElementById("quizForm");
+
+    for (let i = 1; i <= 5; i++) {
+        let options = form["q" + i];
+        for (let j = 0; j < options.length; j++) {
+            if (options[j].checked) {
+                score += parseInt(options[j].value);
+            }
+        }
+    }
+
+    document.getElementById("result").innerHTML =
+        "คะแนนที่ได้: " + score + " / 5";
+}
+</script>
+
+{% endblock %}
