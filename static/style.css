@@ -1,0 +1,166 @@
+/* ใช้ฟอนต์ Kanit ทั้งเว็บ */
+body {
+    margin: 0;
+    font-family: 'Kanit', sans-serif;
+    background: #f4f6f9;
+    color: #333;
+}
+
+/* ---------------- NAVBAR ---------------- */
+
+nav {
+    background: #1e88e5;
+    padding: 15px 0;
+    color: white;
+}
+
+.nav-container {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    opacity: 0.8;
+}
+
+/* ---------------- CONTAINER ---------------- */
+
+.container {
+    width: 90%;
+    margin: 40px auto;
+}
+
+/* ---------------- PAGE TITLE ---------------- */
+
+.page-title {
+    margin-bottom: 30px;
+}
+
+/* ---------------- CARD GRID ---------------- */
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* ตัวเลขใหญ่ */
+.big-number {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #1e88e5;
+}
+
+/* ---------------- PROGRESS BAR ---------------- */
+
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #42a5f5, #1e88e5);
+    width: var(--progress);
+    transition: width 0.8s ease;
+}
+
+/* ---------------- FOOTER ---------------- */
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #1e88e5;
+    color: white;
+    margin-top: 40px;
+}
+/* ---------------- DROPDOWN MENU ---------------- */
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropbtn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: 'Kanit', sans-serif;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    top: 35px;
+}
+
+.dropdown-content a {
+    color: #333;
+    padding: 10px 15px;
+    display: block;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.dropdown-content a:hover {
+    background: #f0f0f0;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    top: 40px;
+}
+
+.dropdown.active .dropdown-content {
+    display: block;
+}

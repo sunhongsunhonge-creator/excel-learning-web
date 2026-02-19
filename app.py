@@ -2,10 +2,17 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
+# ---------------- HOME ----------------
 @app.route("/")
 def home():
-    return render_template("dashboard.html")
+    return render_template(
+        "dashboard.html",
+        total_score=120,
+        lessons_completed=4,
+        progress=75
+    )
 
+# ---------------- LESSONS ----------------
 @app.route('/lesson1')
 def lesson1():
     return render_template('lesson1.html')
@@ -30,6 +37,7 @@ def lesson5():
 def lesson6():
     return render_template('lesson6.html')
 
+# ---------------- QUIZ ----------------
 @app.route("/quiz1")
 def quiz1():
     return render_template("quiz1.html")
@@ -54,6 +62,16 @@ def quiz5():
 def quiz6():
     return render_template("quiz6.html")
 
-import os
+# ---------------- DASHBOARD ----------------
+@app.route("/dashboard")
+def dashboard():
+    return render_template(
+        "dashboard.html",
+        total_score=120,
+        lessons_completed=4,
+        progress=75
+    )
+
+# ---------------- RUN APP ----------------
 if __name__ == "__main__":
-    app.run()   
+    app.run(debug=True)
