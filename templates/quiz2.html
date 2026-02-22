@@ -1,66 +1,48 @@
 {% extends "base.html" %}
-
 {% block content %}
 
 <h2>แบบทดสอบท้ายบทที่ 2 : การใช้งานพื้นฐาน Excel</h2>
 
-<form id="quizForm" name="quizForm" class="card p-4 shadow-sm">
-
+<form method="POST" class="card p-4 shadow-sm">
 
 <p>ข้อ 1: การบันทึกไฟล์ใช้คำสั่งใด?</p>
-<input type="radio" name="q1" value="0"> Save As<br>
+<input type="radio" name="q1" value="0" required> Save As<br>
 <input type="radio" name="q1" value="1"> Save<br>
 <input type="radio" name="q1" value="0"> Print<br>
 <hr>
 
 <p>ข้อ 2: ปุ่มลัดในการบันทึกไฟล์คืออะไร?</p>
-<input type="radio" name="q2" value="1"> Ctrl + S<br>
+<input type="radio" name="q2" value="1" required> Ctrl + S<br>
 <input type="radio" name="q2" value="0"> Ctrl + P<br>
 <input type="radio" name="q2" value="0"> Ctrl + C<br>
 <hr>
 
 <p>ข้อ 3: การลบข้อมูลในเซลล์ใช้ปุ่มใด?</p>
-<input type="radio" name="q3" value="1"> Delete<br>
+<input type="radio" name="q3" value="1" required> Delete<br>
 <input type="radio" name="q3" value="0"> Enter<br>
 <input type="radio" name="q3" value="0"> Tab<br>
 <hr>
 
 <p>ข้อ 4: การคัดลอกข้อมูลใช้คำสั่งใด?</p>
-<input type="radio" name="q4" value="1"> Copy<br>
+<input type="radio" name="q4" value="1" required> Copy<br>
 <input type="radio" name="q4" value="0"> Cut<br>
 <input type="radio" name="q4" value="0"> Paste<br>
 <hr>
 
 <p>ข้อ 5: การวางข้อมูลใช้คำสั่งใด?</p>
-<input type="radio" name="q5" value="1"> Paste<br>
+<input type="radio" name="q5" value="1" required> Paste<br>
 <input type="radio" name="q5" value="0"> Copy<br>
 <input type="radio" name="q5" value="0"> Save<br>
 
-<br><br>
-
-<button type="button" class="btn btn-success mt-3" onclick="checkScore()">ตรวจคำตอบ</button>
+<br>
+<button type="submit" class="btn btn-success mt-3">ตรวจคำตอบ</button>
 
 </form>
 
-<h2 id="result" style="margin-top:20px;"></h2>
-
-<script>
-function checkScore() {
-    let score = 0;
-    let form = document.forms["quizForm"];
-
-    for (let i = 1; i <= 5; i++) {
-        let q = form["q" + i];
-        for (let j = 0; j < q.length; j++) {
-            if (q[j].checked) {
-                score += parseInt(q[j].value);
-            }
-        }
-    }
-
-    document.getElementById("result").innerHTML =
-        "คะแนนที่ได้: " + score + " / 5";
-}
-</script>
+{% if score is not none %}
+    <h2 style="margin-top:20px;">
+        คะแนนที่ได้: {{ score }} / 5
+    </h2>
+{% endif %}
 
 {% endblock %}

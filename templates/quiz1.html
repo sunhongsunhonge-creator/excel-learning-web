@@ -8,74 +8,56 @@
 
 <hr>
 
-<form id="quizForm" name="quizForm" class="card p-4 shadow-sm">
+<form method="POST" class="card p-4 shadow-sm">
 
 <h3>ข้อ 1: โปรแกรม Excel เป็นโปรแกรมประเภทใด?</h3>
-<input type="radio" name="q1" value="0"> Word Processing<br>
-<input type="radio" name="q1" value="1"> Spreadsheet<br>
-<input type="radio" name="q1" value="0"> Presentation<br>
-<input type="radio" name="q1" value="0"> Database<br>
+<input type="radio" name="q1" value="b" required> Spreadsheet<br>
+<input type="radio" name="q1" value="a"> Word Processing<br>
+<input type="radio" name="q1" value="c"> Presentation<br>
+<input type="radio" name="q1" value="d"> Database<br>
 
 <hr>
 
 <h3>ข้อ 2: จุดตัดของแถวและคอลัมน์เรียกว่าอะไร?</h3>
-<input type="radio" name="q2" value="1"> Cell<br>
-<input type="radio" name="q2" value="0"> Row<br>
-<input type="radio" name="q2" value="0"> Column<br>
-<input type="radio" name="q2" value="0"> Table<br>
+<input type="radio" name="q2" value="cell" required> Cell<br>
+<input type="radio" name="q2" value="row"> Row<br>
+<input type="radio" name="q2" value="column"> Column<br>
+<input type="radio" name="q2" value="table"> Table<br>
 
 <hr>
 
 <h3>ข้อ 3: คอลัมน์ใน Excel แสดงเป็นอะไร?</h3>
-<input type="radio" name="q3" value="0"> ตัวเลข<br>
-<input type="radio" name="q3" value="1"> ตัวอักษร<br>
-<input type="radio" name="q3" value="0"> สัญลักษณ์<br>
-<input type="radio" name="q3" value="0"> เครื่องหมาย<br>
+<input type="radio" name="q3" value="letter" required> ตัวอักษร<br>
+<input type="radio" name="q3" value="number"> ตัวเลข<br>
 
 <hr>
 
 <h3>ข้อ 4: แถวใน Excel แสดงเป็นอะไร?</h3>
-<input type="radio" name="q4" value="1"> ตัวเลข<br>
-<input type="radio" name="q4" value="0"> ตัวอักษร<br>
-<input type="radio" name="q4" value="0"> สี<br>
-<input type="radio" name="q4" value="0"> รูปภาพ<br>
+<input type="radio" name="q4" value="number" required> ตัวเลข<br>
+<input type="radio" name="q4" value="letter"> ตัวอักษร<br>
 
 <hr>
 
 <h3>ข้อ 5: Excel นิยมใช้ในงานประเภทใด?</h3>
-<input type="radio" name="q5" value="1"> งานบัญชีและจัดการข้อมูล<br>
-<input type="radio" name="q5" value="0"> ตัดต่อวิดีโอ<br>
-<input type="radio" name="q5" value="0"> วาดภาพ 3 มิติ<br>
-<input type="radio" name="q5" value="0"> เขียนโปรแกรมเกม<br>
+<input type="radio" name="q5" value="accounting" required> งานบัญชีและจัดการข้อมูล<br>
+<input type="radio" name="q5" value="video"> ตัดต่อวิดีโอ<br>
+<input type="radio" name="q5" value="3d"> วาดภาพ 3 มิติ<br>
+<input type="radio" name="q5" value="game"> เขียนโปรแกรมเกม<br>
 
 <br><br>
 
-<button type="button" class="btn btn-success mt-3" onclick="checkScore()">ตรวจคำตอบ</button>
+<button type="submit" class="btn">ตรวจคำตอบ</button>
 
 </form>
 
-<h2 id="result" style="margin-top:20px;"></h2>
+{% if result %}
+<hr>
+<h2>{{ result }}</h2>
+<p>{{ explanation }}</p>
+<a class="btn" href="/dashboard">ไปที่ Dashboard</a>
+{% endif %}
 
-<br>
+<br><br>
 <a href="/">⬅ กลับหน้าแรก</a>
-
-<script>
-function checkScore() {
-    let score = 0;
-    let form = document.forms["quizForm"];
-
-    for (let i = 1; i <= 5; i++) {
-        let q = form["q" + i];
-        for (let j = 0; j < q.length; j++) {
-            if (q[j].checked) {
-                score += parseInt(q[j].value);
-            }
-        }
-    }
-
-    document.getElementById("result").innerHTML =
-        "คะแนนที่ได้: " + score + " / 5";
-}
-</script>
 
 {% endblock %}
