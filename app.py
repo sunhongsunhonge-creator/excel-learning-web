@@ -1,15 +1,28 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
 
 app = Flask(__name__)
+app.secret_key = "excel_secret_key"
 
-# ---------------- HOME / DASHBOARD ---------------- #
+TOTAL_QUIZZES = 6
+
+
+# ---------------- DASHBOARD ---------------- #
 
 @app.route("/")
 def home():
-    return render_template("dashboard.html",
-                           total_score=120,
-                           lessons_completed=6,
-                           progress=75)
+    scores = session.get("scores", {})
+
+    total_score = sum(scores.values())
+    lessons_completed = len(scores)
+    progress = int((lessons_completed / TOTAL_QUIZZES) * 100)
+
+    return render_template(
+        "dashboard.html",
+        total_score=total_score,
+        lessons_completed=lessons_completed,
+        progress=progress
+    )
+
 
 # ---------------- LESSON ---------------- #
 
@@ -38,12 +51,11 @@ def lesson6():
     return render_template('lesson6.html')
 
 
-# ---------------- QUIZ 1 (แบบเทียบคำตอบข้อความ) ---------------- #
+# ---------------- QUIZ 1 ---------------- #
 
 @app.route("/quiz1", methods=["GET", "POST"])
 def quiz1():
-    result = None
-    explanation = None
+    score = None
 
     if request.method == "POST":
         score = 0
@@ -60,57 +72,57 @@ def quiz1():
             if request.form.get(question) == correct_answer:
                 score += 1
 
-        if score >= 3:
-            result = f"คุณได้ {score} / 5 คะแนน ผ่านเกณฑ์ 👍"
-        else:
-            result = f"คุณได้ {score} / 5 คะแนน ยังไม่ผ่าน ❌"
+        scores = session.get("scores", {})
+        scores["quiz1"] = score
+        session["scores"] = scores
 
-        explanation = "เกณฑ์ผ่านคือ 3 คะแนนขึ้นไป"
-
-    return render_template("quiz1.html",
-                           result=result,
-                           explanation=explanation)
+    return render_template("quiz1.html", score=score)
 
 
-# ---------------- QUIZ 2-6 (แบบ value = 1 / 0) ---------------- #
+# ---------------- QUIZ 2-6 ---------------- #
 
-def calculate_score(template_name):
+def calculate_score(quiz_name, template_name):
     score = None
 
     if request.method == "POST":
         score = 0
+
         for i in range(1, 6):
             answer = request.form.get(f"q{i}")
             if answer:
                 score += int(answer)
+
+        scores = session.get("scores", {})
+        scores[quiz_name] = score
+        session["scores"] = scores
 
     return render_template(template_name, score=score)
 
 
 @app.route("/quiz2", methods=["GET", "POST"])
 def quiz2():
-    return calculate_score("quiz2.html")
+    return calculate_score("quiz2", "quiz2.html")
 
 
 @app.route("/quiz3", methods=["GET", "POST"])
 def quiz3():
-    return calculate_score("quiz3.html")
+    return calculate_score("quiz3", "quiz3.html")
 
 
 @app.route("/quiz4", methods=["GET", "POST"])
 def quiz4():
-    return calculate_score("quiz4.html")
+    return calculate_score("quiz4", "quiz4.html")
 
 
 @app.route("/quiz5", methods=["GET", "POST"])
 def quiz5():
-    return calculate_score("quiz5.html")
+    return calculate_score("quiz5", "quiz5.html")
 
 
 @app.route("/quiz6", methods=["GET", "POST"])
 def quiz6():
-    return calculate_score("quiz6.html")
+    return calculate_score("quiz6", "quiz6.html")
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
