@@ -1,63 +1,111 @@
+{% extends "base.html" %}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Quiz 1</title>
-</head>
-<body>
+{% block content %}
 
-<h1 style="text-align:center;">
+<div class="card shadow-sm p-4">
+
+<h2 class="text-center mb-4">
 แบบทดสอบท้ายบทที่ 1 : ความรู้เบื้องต้นเกี่ยวกับ Excel
-</h1>
-
-<hr>
+</h2>
 
 <form method="POST">
 
-<h3>ข้อ 1: โปรแกรม Excel เป็นโปรแกรมประเภทใด?</h3>
-<input type="radio" name="q1" value="b" required> Spreadsheet<br>
-<input type="radio" name="q1" value="a"> Word Processing<br>
-<input type="radio" name="q1" value="c"> Presentation<br>
-<input type="radio" name="q1" value="d"> Database<br>
+<!-- ข้อ 1 -->
+<div class="mb-4">
+    <p><strong>ข้อ 1: โปรแกรม Excel เป็นโปรแกรมประเภทใด?</strong></p>
 
-<hr>
+    <div>
+        <input type="radio" name="q1" value="b" required> Spreadsheet
+    </div>
+    <div>
+        <input type="radio" name="q1" value="a"> Word Processing
+    </div>
+    <div>
+        <input type="radio" name="q1" value="c"> Presentation
+    </div>
+    <div>
+        <input type="radio" name="q1" value="d"> Database
+    </div>
+</div>
 
-<h3>ข้อ 2: จุดตัดของแถวและคอลัมน์เรียกว่าอะไร?</h3>
-<input type="radio" name="q2" value="cell" required> Cell<br>
-<input type="radio" name="q2" value="row"> Row<br>
-<input type="radio" name="q2" value="column"> Column<br>
-<input type="radio" name="q2" value="table"> Table<br>
+<!-- ข้อ 2 -->
+<div class="mb-4">
+    <p><strong>ข้อ 2: จุดตัดของแถวและคอลัมน์เรียกว่าอะไร?</strong></p>
 
-<hr>
+    <div>
+        <input type="radio" name="q2" value="cell" required> Cell
+    </div>
+    <div>
+        <input type="radio" name="q2" value="row"> Row
+    </div>
+    <div>
+        <input type="radio" name="q2" value="column"> Column
+    </div>
+    <div>
+        <input type="radio" name="q2" value="table"> Table
+    </div>
+</div>
 
-<h3>ข้อ 3: คอลัมน์ใน Excel แสดงเป็นอะไร?</h3>
-<input type="radio" name="q3" value="letter" required> ตัวอักษร<br>
-<input type="radio" name="q3" value="number"> ตัวเลข<br>
+<!-- ข้อ 3 -->
+<div class="mb-4">
+    <p><strong>ข้อ 3: คอลัมน์ใน Excel แสดงเป็นอะไร?</strong></p>
 
-<hr>
+    <div>
+        <input type="radio" name="q3" value="letter" required> ตัวอักษร (A, B, C...)
+    </div>
+    <div>
+        <input type="radio" name="q3" value="number"> ตัวเลข (1, 2, 3...)
+    </div>
+</div>
 
-<h3>ข้อ 4: แถวใน Excel แสดงเป็นอะไร?</h3>
-<input type="radio" name="q4" value="number" required> ตัวเลข<br>
-<input type="radio" name="q4" value="letter"> ตัวอักษร<br>
+<!-- ข้อ 4 -->
+<div class="mb-4">
+    <p><strong>ข้อ 4: แถวใน Excel แสดงเป็นอะไร?</strong></p>
 
-<hr>
+    <div>
+        <input type="radio" name="q4" value="number" required> ตัวเลข (1, 2, 3...)
+    </div>
+    <div>
+        <input type="radio" name="q4" value="letter"> ตัวอักษร (A, B, C...)
+    </div>
+</div>
 
-<h3>ข้อ 5: Excel นิยมใช้ในงานประเภทใด?</h3>
-<input type="radio" name="q5" value="accounting" required> งานบัญชีและจัดการข้อมูล<br>
-<input type="radio" name="q5" value="video"> ตัดต่อวิดีโอ<br>
-<input type="radio" name="q5" value="3d"> วาดภาพ 3 มิติ<br>
-<input type="radio" name="q5" value="game"> เขียนโปรแกรมเกม<br>
+<!-- ข้อ 5 -->
+<div class="mb-4">
+    <p><strong>ข้อ 5: Excel นิยมใช้ในงานประเภทใด?</strong></p>
 
-<br><br>
-<button type="submit">ตรวจคำตอบ</button>
+    <div>
+        <input type="radio" name="q5" value="accounting" required> งานบัญชีและจัดการข้อมูล
+    </div>
+    <div>
+        <input type="radio" name="q5" value="video"> ตัดต่อวิดีโอ
+    </div>
+    <div>
+        <input type="radio" name="q5" value="3d"> วาดภาพ 3 มิติ
+    </div>
+    <div>
+        <input type="radio" name="q5" value="game"> เขียนโปรแกรมเกม
+    </div>
+</div>
+
+<button type="submit" class="btn" style="width:100%;">
+    ตรวจคำตอบ
+</button>
+
 </form>
 
+</div>
+
+
 {% if results %}
+<div class="mt-4">
+
 <hr>
-<h2>คุณได้คะแนน {{ score }} / 5</h2>
+
+<h4>คุณได้คะแนน {{ score }} / 5</h4>
 
 {% for item in results %}
-<div style="margin-bottom:15px;">
+<div class="card p-3 mb-3">
     {% if item.is_correct %}
         <p style="color:green;">✔ ตอบถูก</p>
     {% else %}
@@ -67,7 +115,10 @@
     <p><strong>คำอธิบาย:</strong> {{ item.explanation }}</p>
 </div>
 {% endfor %}
+
+<a class="btn" href="/">กลับไปหน้าหลัก</a>
+
+</div>
 {% endif %}
 
-</body>
-</html
+{% endblock %}
