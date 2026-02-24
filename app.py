@@ -123,6 +123,8 @@ def quiz5():
 def quiz6():
     return calculate_score("quiz6", "quiz6.html")
 
+import os
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
