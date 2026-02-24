@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+
 {% block content %}
 
 <h2>แบบทดสอบท้ายบทที่ 5 : การสร้างกราฟ (Charts) ใน Microsoft Excel</h2>
@@ -6,43 +7,56 @@
 <form method="POST" class="card p-4 shadow-sm">
 
 <p>ข้อ 1: การใช้กราฟมีประโยชน์อย่างไร?</p>
-<input type="radio" name="q1" value="1" required> ช่วยให้ข้อมูลเข้าใจง่ายและเห็นแนวโน้มชัดเจน<br>
-<input type="radio" name="q1" value="0"> ทำให้ไฟล์มีขนาดใหญ่ขึ้น<br>
-<input type="radio" name="q1" value="0"> ใช้แทนสูตรคำนวณได้<br>
+<input type="radio" name="q1" value="large" required> ทำให้ไฟล์มีขนาดใหญ่ขึ้น<br>
+<input type="radio" name="q1" value="trend"> ช่วยให้ข้อมูลเข้าใจง่ายและเห็นแนวโน้มชัดเจน<br>
+<input type="radio" name="q1" value="replace_formula"> ใช้แทนสูตรคำนวณได้<br>
 <hr>
 
 <p>ข้อ 2: กราฟชนิดใดเหมาะสำหรับแสดงแนวโน้มข้อมูลตามช่วงเวลา?</p>
-<input type="radio" name="q2" value="1" required> Line Chart<br>
-<input type="radio" name="q2" value="0"> Pie Chart<br>
-<input type="radio" name="q2" value="0"> Column Chart<br>
+<input type="radio" name="q2" value="pie" required> Pie Chart<br>
+<input type="radio" name="q2" value="column"> Column Chart<br>
+<input type="radio" name="q2" value="line"> Line Chart<br>
 <hr>
 
 <p>ข้อ 3: ขั้นตอนแรกในการสร้างกราฟคืออะไร?</p>
-<input type="radio" name="q3" value="1" required> เลือกช่วงข้อมูลที่ต้องการ<br>
-<input type="radio" name="q3" value="0"> กดปุ่ม Delete<br>
-<input type="radio" name="q3" value="0"> เปลี่ยนสีเซลล์<br>
+<input type="radio" name="q3" value="delete" required> กดปุ่ม Delete<br>
+<input type="radio" name="q3" value="select"> เลือกช่วงข้อมูลที่ต้องการ<br>
+<input type="radio" name="q3" value="color"> เปลี่ยนสีเซลล์<br>
 <hr>
 
 <p>ข้อ 4: หากต้องการแสดงค่าตัวเลขบนกราฟควรเพิ่มอะไร?</p>
-<input type="radio" name="q4" value="1" required> Data Labels<br>
-<input type="radio" name="q4" value="0"> Formula Bar<br>
-<input type="radio" name="q4" value="0"> Row Header<br>
+<input type="radio" name="q4" value="formula" required> Formula Bar<br>
+<input type="radio" name="q4" value="row"> Row Header<br>
+<input type="radio" name="q4" value="label"> Data Labels<br>
 <hr>
 
 <p>ข้อ 5: กราฟชนิดใดเหมาะสำหรับแสดงสัดส่วนของข้อมูล?</p>
-<input type="radio" name="q5" value="1" required> Pie Chart<br>
-<input type="radio" name="q5" value="0"> Line Chart<br>
-<input type="radio" name="q5" value="0"> Bar Chart<br>
+<input type="radio" name="q5" value="line" required> Line Chart<br>
+<input type="radio" name="q5" value="bar"> Bar Chart<br>
+<input type="radio" name="q5" value="pie"> Pie Chart<br>
 
 <br>
 <button type="submit" class="btn btn-success mt-3">ตรวจคำตอบ</button>
 
 </form>
 
-{% if score is not none %}
-    <h2 style="margin-top:20px;">
-        คะแนนที่ได้: {{ score }} / 5
-    </h2>
+{% if results %}
+<hr>
+<h2>คุณได้คะแนน {{ score }} / 5</h2>
+
+{% for item in results %}
+<div class="card p-3 mb-3">
+    {% if item.is_correct %}
+        <p style="color:green;">✔ ตอบถูก</p>
+    {% else %}
+        <p style="color:red;">❌ ตอบผิด</p>
+        <p><strong>คำตอบที่ถูก:</strong> {{ item.correct_text }}</p>
+    {% endif %}
+    <p><strong>คำอธิบาย:</strong> {{ item.explanation }}</p>
+</div>
+{% endfor %}
+
+<a class="btn btn-primary" href="/dashboard">กลับไป Dashboard</a>
 {% endif %}
 
 {% endblock %}

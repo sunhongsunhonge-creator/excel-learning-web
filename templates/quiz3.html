@@ -6,43 +6,56 @@
 <form method="POST" class="card p-4 shadow-sm">
 
 <p>ข้อ 1: การเขียนสูตรใน Excel ต้องเริ่มต้นด้วยสัญลักษณ์ใด?</p>
-<input type="radio" name="q1" value="1" required> = (เครื่องหมายเท่ากับ)<br>
-<input type="radio" name="q1" value="0"> + (เครื่องหมายบวก)<br>
-<input type="radio" name="q1" value="0"> # (เครื่องหมายแฮช)<br>
+<input type="radio" name="q1" value="plus" required> + (เครื่องหมายบวก)<br>
+<input type="radio" name="q1" value="equal"> = (เครื่องหมายเท่ากับ)<br>
+<input type="radio" name="q1" value="hash"> # (เครื่องหมายแฮช)<br>
 <hr>
 
 <p>ข้อ 2: สูตรใดใช้สำหรับหาผลรวมของข้อมูล?</p>
-<input type="radio" name="q2" value="1" required> SUM<br>
-<input type="radio" name="q2" value="0"> AVERAGE<br>
-<input type="radio" name="q2" value="0"> MAX<br>
+<input type="radio" name="q2" value="average" required> AVERAGE<br>
+<input type="radio" name="q2" value="sum"> SUM<br>
+<input type="radio" name="q2" value="max"> MAX<br>
 <hr>
 
 <p>ข้อ 3: สูตร AVERAGE มีหน้าที่อะไร?</p>
-<input type="radio" name="q3" value="1" required> หาค่าเฉลี่ยของข้อมูล<br>
-<input type="radio" name="q3" value="0"> หาค่าสูงสุด<br>
-<input type="radio" name="q3" value="0"> หาผลรวม<br>
+<input type="radio" name="q3" value="max" required> หาค่าสูงสุด<br>
+<input type="radio" name="q3" value="sum"> หาผลรวม<br>
+<input type="radio" name="q3" value="avg"> หาค่าเฉลี่ยของข้อมูล<br>
 <hr>
 
 <p>ข้อ 4: หากต้องการหาค่าต่ำสุดในช่วง A1 ถึง A5 ต้องใช้สูตรใด?</p>
-<input type="radio" name="q4" value="1" required> =MIN(A1:A5)<br>
-<input type="radio" name="q4" value="0"> =MAX(A1:A5)<br>
-<input type="radio" name="q4" value="0"> =SUM(A1:A5)<br>
+<input type="radio" name="q4" value="max" required> =MAX(A1:A5)<br>
+<input type="radio" name="q4" value="sum"> =SUM(A1:A5)<br>
+<input type="radio" name="q4" value="min"> =MIN(A1:A5)<br>
 <hr>
 
 <p>ข้อ 5: สูตร =SUM(A1:A5) หมายถึงอะไร?</p>
-<input type="radio" name="q5" value="1" required> รวมค่าตั้งแต่ A1 ถึง A5<br>
-<input type="radio" name="q5" value="0"> หาค่าเฉลี่ยของ A1 ถึง A5<br>
-<input type="radio" name="q5" value="0"> หาค่าสูงสุดของ A1 ถึง A5<br>
+<input type="radio" name="q5" value="avg" required> หาค่าเฉลี่ยของ A1 ถึง A5<br>
+<input type="radio" name="q5" value="max"> หาค่าสูงสุดของ A1 ถึง A5<br>
+<input type="radio" name="q5" value="sum"> รวมค่าตั้งแต่ A1 ถึง A5<br>
 
 <br>
 <button type="submit" class="btn btn-success mt-3">ตรวจคำตอบ</button>
 
 </form>
 
-{% if score is not none %}
-    <h2 style="margin-top:20px;">
-        คะแนนที่ได้: {{ score }} / 5
-    </h2>
+{% if results %}
+<hr>
+<h2>คุณได้คะแนน {{ score }} / 5</h2>
+
+{% for item in results %}
+<div class="card p-3 mb-3">
+    {% if item.is_correct %}
+        <p style="color:green;">✔ ตอบถูก</p>
+    {% else %}
+        <p style="color:red;">❌ ตอบผิด</p>
+        <p><strong>คำตอบที่ถูก:</strong> {{ item.correct_text }}</p>
+    {% endif %}
+    <p><strong>คำอธิบาย:</strong> {{ item.explanation }}</p>
+</div>
+{% endfor %}
+
+<a class="btn btn-primary" href="/dashboard">กลับไป Dashboard</a>
 {% endif %}
 
 {% endblock %}

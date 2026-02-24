@@ -6,43 +6,56 @@
 <form method="POST" class="card p-4 shadow-sm">
 
 <p>ข้อ 1: ฟังก์ชัน IF ใช้สำหรับทำอะไร?</p>
-<input type="radio" name="q1" value="1" required> ตรวจสอบเงื่อนไขและแสดงผลตามจริงหรือเท็จ<br>
-<input type="radio" name="q1" value="0"> หาผลรวมของข้อมูล<br>
-<input type="radio" name="q1" value="0"> จัดรูปแบบเซลล์<br>
+<input type="radio" name="q1" value="sum" required> หาผลรวมของข้อมูล<br>
+<input type="radio" name="q1" value="if_logic"> ตรวจสอบเงื่อนไขและแสดงผลตามจริงหรือเท็จ<br>
+<input type="radio" name="q1" value="format"> จัดรูปแบบเซลล์<br>
 <hr>
 
 <p>ข้อ 2: โครงสร้างที่ถูกต้องของฟังก์ชัน IF คือข้อใด?</p>
-<input type="radio" name="q2" value="1" required> =IF(เงื่อนไข, ค่าถ้าเป็นจริง, ค่าถ้าเป็นเท็จ)<br>
-<input type="radio" name="q2" value="0"> =IF(ค่าถ้าเป็นจริง, เงื่อนไข, ค่าถ้าเป็นเท็จ)<br>
-<input type="radio" name="q2" value="0"> =IF(เงื่อนไข, ค่าถ้าเป็นเท็จ)<br>
+<input type="radio" name="q2" value="wrong_order" required> =IF(ค่าถ้าเป็นจริง, เงื่อนไข, ค่าถ้าเป็นเท็จ)<br>
+<input type="radio" name="q2" value="correct_structure"> =IF(เงื่อนไข, ค่าถ้าเป็นจริง, ค่าถ้าเป็นเท็จ)<br>
+<input type="radio" name="q2" value="missing_part"> =IF(เงื่อนไข, ค่าถ้าเป็นเท็จ)<br>
 <hr>
 
 <p>ข้อ 3: จากสูตร =IF(A1>=50,"ผ่าน","ไม่ผ่าน") หาก A1 เท่ากับ 40 จะแสดงผลว่าอะไร?</p>
-<input type="radio" name="q3" value="1" required> ไม่ผ่าน<br>
-<input type="radio" name="q3" value="0"> ผ่าน<br>
-<input type="radio" name="q3" value="0"> 50<br>
+<input type="radio" name="q3" value="pass" required> ผ่าน<br>
+<input type="radio" name="q3" value="fail"> ไม่ผ่าน<br>
+<input type="radio" name="q3" value="number"> 50<br>
 <hr>
 
 <p>ข้อ 4: ฟังก์ชัน IF ซ้อนกัน (Nested IF) ใช้ในกรณีใด?</p>
-<input type="radio" name="q4" value="1" required> เมื่อต้องมีเงื่อนไขมากกว่าหนึ่งระดับ<br>
-<input type="radio" name="q4" value="0"> เมื่อต้องการหาผลรวม<br>
-<input type="radio" name="q4" value="0"> เมื่อต้องการจัดรูปแบบตัวอักษร<br>
+<input type="radio" name="q4" value="sum" required> เมื่อต้องการหาผลรวม<br>
+<input type="radio" name="q4" value="nested"> เมื่อต้องมีเงื่อนไขมากกว่าหนึ่งระดับ<br>
+<input type="radio" name="q4" value="format"> เมื่อต้องการจัดรูปแบบตัวอักษร<br>
 <hr>
 
 <p>ข้อ 5: จากสูตร =IF(C2>=100000, C2*0.1, 0) หากยอดขายไม่ถึง 100,000 จะได้ผลลัพธ์เป็นอะไร?</p>
-<input type="radio" name="q5" value="1" required> 0<br>
-<input type="radio" name="q5" value="0"> โบนัส 10%<br>
-<input type="radio" name="q5" value="0"> 100000<br>
+<input type="radio" name="q5" value="bonus" required> โบนัส 10%<br>
+<input type="radio" name="q5" value="zero"> 0<br>
+<input type="radio" name="q5" value="number"> 100000<br>
 
 <br>
 <button type="submit" class="btn btn-success mt-3">ตรวจคำตอบ</button>
 
 </form>
 
-{% if score is not none %}
-    <h2 style="margin-top:20px;">
-        คะแนนที่ได้: {{ score }} / 5
-    </h2>
+{% if results %}
+<hr>
+<h2>คุณได้คะแนน {{ score }} / 5</h2>
+
+{% for item in results %}
+<div class="card p-3 mb-3">
+    {% if item.is_correct %}
+        <p style="color:green;">✔ ตอบถูก</p>
+    {% else %}
+        <p style="color:red;">❌ ตอบผิด</p>
+        <p><strong>คำตอบที่ถูก:</strong> {{ item.correct_text }}</p>
+    {% endif %}
+    <p><strong>คำอธิบาย:</strong> {{ item.explanation }}</p>
+</div>
+{% endfor %}
+
+<a class="btn btn-primary" href="/dashboard">กลับไป Dashboard</a>
 {% endif %}
 
 {% endblock %}

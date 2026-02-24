@@ -3,67 +3,59 @@
 
 <h2>Quiz 6 : การจัดรูปแบบและการพิมพ์ใน Excel</h2>
 
-<form id="quizForm" name="quizForm" class="card p-4 shadow-sm">
+<form method="POST" class="card p-4 shadow-sm">
 
 <h4>ข้อ 1: เมนูใดใช้สำหรับจัดรูปแบบตัวอักษรและการจัดตำแหน่งเซลล์?</h4>
-<input type="radio" name="q1" value="1"> Home<br>
-<input type="radio" name="q1" value="0"> Insert<br>
-<input type="radio" name="q1" value="0"> Data<br>
-
+<input type="radio" name="q1" value="insert" required> Insert<br>
+<input type="radio" name="q1" value="home"> Home<br>
+<input type="radio" name="q1" value="data"> Data<br>
 <hr>
 
 <h4>ข้อ 2: รูปแบบใดใช้สำหรับแสดงค่าเป็นเปอร์เซ็นต์?</h4>
-<input type="radio" name="q2" value="0"> Currency<br>
-<input type="radio" name="q2" value="1"> Percentage<br>
-<input type="radio" name="q2" value="0"> Date<br>
-
+<input type="radio" name="q2" value="currency" required> Currency<br>
+<input type="radio" name="q2" value="date"> Date<br>
+<input type="radio" name="q2" value="percentage"> Percentage<br>
 <hr>
 
 <h4>ข้อ 3: การกำหนด Currency มีผลอย่างไร?</h4>
-<input type="radio" name="q3" value="0"> เปลี่ยนค่าที่ใช้คำนวณ<br>
-<input type="radio" name="q3" value="1"> เปลี่ยนรูปแบบการแสดงผลเท่านั้น<br>
-<input type="radio" name="q3" value="0"> ลบค่าทศนิยม<br>
-
+<input type="radio" name="q3" value="change_value" required> เปลี่ยนค่าที่ใช้คำนวณ<br>
+<input type="radio" name="q3" value="format_only"> เปลี่ยนรูปแบบการแสดงผลเท่านั้น<br>
+<input type="radio" name="q3" value="remove_decimal"> ลบค่าทศนิยม<br>
 <hr>
 
 <h4>ข้อ 4: การตั้งค่าหน้ากระดาษทำได้จากเมนูใด?</h4>
-<input type="radio" name="q4" value="0"> View<br>
-<input type="radio" name="q4" value="1"> Page Layout<br>
-<input type="radio" name="q4" value="0"> Review<br>
-
+<input type="radio" name="q4" value="view" required> View<br>
+<input type="radio" name="q4" value="review"> Review<br>
+<input type="radio" name="q4" value="page_layout"> Page Layout<br>
 <hr>
 
 <h4>ข้อ 5: คำสั่งพิมพ์งานอยู่ที่เมนูใด?</h4>
-<input type="radio" name="q5" value="1"> File → Print<br>
-<input type="radio" name="q5" value="0"> Home → Print<br>
-<input type="radio" name="q5" value="0"> Insert → Print<br>
+<input type="radio" name="q5" value="home_print" required> Home → Print<br>
+<input type="radio" name="q5" value="insert_print"> Insert → Print<br>
+<input type="radio" name="q5" value="file_print"> File → Print<br>
 
 <br>
-
-<button type="button" class="btn btn-success mt-3" onclick="checkScore()">ตรวจคำตอบ</button>
+<button type="submit" class="btn btn-success mt-3">ตรวจคำตอบ</button>
 
 </form>
 
-<h3 id="result" style="margin-top:20px;"></h3>
+{% if results %}
+<hr>
+<h2>คุณได้คะแนน {{ score }} / 5</h2>
 
-<script>
-function checkScore() {
-    let score = 0;
-    let total = 5;
-    let form = document.forms["quizForm"];
+{% for item in results %}
+<div class="card p-3 mb-3">
+    {% if item.is_correct %}
+        <p style="color:green;">✔ ตอบถูก</p>
+    {% else %}
+        <p style="color:red;">❌ ตอบผิด</p>
+        <p><strong>คำตอบที่ถูก:</strong> {{ item.correct_text }}</p>
+    {% endif %}
+    <p><strong>คำอธิบาย:</strong> {{ item.explanation }}</p>
+</div>
+{% endfor %}
 
-    for (let i = 1; i <= total; i++) {
-        let q = form["q" + i];
-        for (let j = 0; j < q.length; j++) {
-            if (q[j].checked) {
-                score += parseInt(q[j].value);
-            }
-        }
-    }
-
-    document.getElementById("result").innerHTML =
-        "คะแนนที่ได้: " + score + " / " + total;
-}
-</script>
+<a class="btn btn-primary" href="/dashboard">กลับไป Dashboard</a>
+{% endif %}
 
 {% endblock %}
