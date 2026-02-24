@@ -5,11 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Excel Learning{% endblock %}</title>
 
-    <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
-    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        nav {
+            background: #1976d2;
+            padding: 10px;
+        }
+
+        .menu {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .menu a, .dropbtn {
+            color: white;
+            text-decoration: none;
+            background: none;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: white;
+            min-width: 150px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 10px;
+            color: black;
+        }
+
+        .dropdown.active .dropdown-content {
+            display: block;
+        }
+
+        /* มือถือ */
+        @media (max-width: 768px) {
+            .menu {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .dropdown-content {
+                position: static;
+                width: 100%;
+            }
+        }
+
+        .container {
+            padding: 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: #f4f4f4;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
 
@@ -17,7 +89,6 @@
     <div class="menu">
         <a href="/">หน้าหลัก</a>
 
-        <!-- Dropdown Lessons -->
         <div class="dropdown">
             <button class="dropbtn">บทเรียน ▾</button>
             <div class="dropdown-content">
@@ -30,7 +101,6 @@
             </div>
         </div>
 
-        <!-- Dropdown Quiz -->
         <div class="dropdown">
             <button class="dropbtn">Quiz ▾</button>
             <div class="dropdown-content">
@@ -42,25 +112,23 @@
                 <a href="/quiz6">Quiz 6</a>
             </div>
         </div>
-
-    
     </div>
 </nav>
 
-<!-- ส่วนแสดงเนื้อหา -->
 <div class="container">
     {% block content %}{% endblock %}
 </div>
 
 <footer>
-    © 2026 Excel Learning 
+    © 2026 Excel Learning
 </footer>
+
 <script>
 document.querySelectorAll(".dropbtn").forEach(button => {
-    button.addEventListener("click", function () {
+    button.addEventListener("click", function (e) {
+        e.stopPropagation();
         let dropdown = this.parentElement;
 
-        // ปิด dropdown อื่นก่อน
         document.querySelectorAll(".dropdown").forEach(d => {
             if (d !== dropdown) {
                 d.classList.remove("active");
@@ -71,14 +139,12 @@ document.querySelectorAll(".dropbtn").forEach(button => {
     });
 });
 
-// คลิกพื้นที่อื่นให้ปิด
-window.addEventListener("click", function(e) {
-    if (!e.target.matches('.dropbtn')) {
-        document.querySelectorAll(".dropdown").forEach(d => {
-            d.classList.remove("active");
-        });
-    }
+window.addEventListener("click", function() {
+    document.querySelectorAll(".dropdown").forEach(d => {
+        d.classList.remove("active");
+    });
 });
 </script>
+
 </body>
 </html>
