@@ -271,6 +271,7 @@ def quiz6():
     }
     return handle_quiz("quiz6", "quiz6.html", questions)
 
+import os
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
