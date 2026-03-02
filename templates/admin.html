@@ -1,0 +1,22 @@
+{% include 'navbar.html' %}
+
+<h1 style="text-align:center;">Admin Panel</h1>
+
+<div style="width:60%;margin:auto;background:white;padding:20px;border-radius:10px;box-shadow:0 0 10px #ccc;">
+
+{% for user in users %}
+    <div style="padding:10px;border-bottom:1px solid #ddd;">
+        👤 {{ user.username }} 
+        <b>({{ user.role }})</b>
+
+        {% if user.role != "admin" %}
+            <a href="/make_admin/{{ user.id }}">[ให้เป็น Admin]</a>
+        {% endif %}
+
+        {% if user.username != "admin" %}
+            <a href="/delete_user/{{ user.id }}" style="color:red;">[ลบ]</a>
+        {% endif %}
+    </div>
+{% endfor %}
+
+</div>

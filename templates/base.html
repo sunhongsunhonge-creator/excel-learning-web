@@ -106,6 +106,7 @@
 
 <nav>
     <div class="menu">
+
         <a href="/">หน้าหลัก</a>
 
         <div class="dropdown">
@@ -131,6 +132,30 @@
                 <a href="/quiz6">Quiz 6</a>
             </div>
         </div>
+
+        <!-- ดันเมนูไปขวา -->
+        <div style="margin-left:auto; display:flex; gap:15px; align-items:center;">
+
+            {% if current_user.is_authenticated %}
+
+                <!-- โชว์ชื่อผู้ใช้ -->
+                <span style="color:white;">
+                    👤 {{ current_user.username }}
+                </span>
+
+                <!-- ถ้าเป็น admin -->
+                {% if current_user.role == 'admin' %}
+                    <a href="/admin">Admin</a>
+                {% endif %}
+
+                <a href="/logout">Logout</a>
+
+            {% else %}
+                <a href="/login">Login</a>
+            {% endif %}
+
+        </div>
+
     </div>
 </nav>
 
