@@ -1,25 +1,133 @@
 <!DOCTYPE html>
-<html>
+<html lang="th">
 <head>
-    <title>Login</title>
+    <meta charset="UTF-8">
+    <title>Login - Excel Learning</title>
+    <style>
+        body{
+            margin:0;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg,#8b0000,#c40000);
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+        }
+
+        .card{
+            background:white;
+            padding:35px;
+            width:400px;
+            border-radius:20px;
+            box-shadow:0 25px 50px rgba(0,0,0,0.25);
+            text-align:center;
+            animation:fadeIn 0.6s ease-in-out;
+        }
+
+        @keyframes fadeIn{
+            from{opacity:0;transform:translateY(20px);}
+            to{opacity:1;transform:translateY(0);}
+        }
+
+        .college-logo{
+            width:120px;
+            margin-bottom:15px;
+        }
+
+        h2{
+            margin:5px 0;
+            color:#8b0000;
+        }
+
+        .subtitle{
+            font-size:14px;
+            color:#555;
+            margin-bottom:20px;
+            line-height:1.6;
+        }
+
+        input{
+            width:100%;
+            padding:12px;
+            margin:8px 0;
+            border-radius:8px;
+            border:1px solid #ddd;
+            outline:none;
+            transition:0.3s;
+        }
+
+        input:focus{
+            border-color:#8b0000;
+            box-shadow:0 0 6px rgba(139,0,0,0.4);
+        }
+
+        .btn{
+            width:100%;
+            padding:12px;
+            border:none;
+            border-radius:8px;
+            cursor:pointer;
+            font-size:15px;
+            margin-top:10px;
+            transition:0.3s;
+        }
+
+        .login-btn{
+            background:#8b0000;
+            color:white;
+        }
+
+        .login-btn:hover{
+            background:#a80000;
+        }
+
+        .register-btn{
+            background:white;
+            border:2px solid #8b0000;
+            color:#8b0000;
+        }
+
+        .register-btn:hover{
+            background:#8b0000;
+            color:white;
+        }
+
+        .footer{
+            margin-top:15px;
+            font-size:13px;
+            color:#777;
+        }
+    </style>
 </head>
-<body style="font-family:sans-serif;background:#ecf0f1;display:flex;justify-content:center;align-items:center;height:100vh;">
+<body>
 
-<div style="background:white;padding:40px;border-radius:10px;width:300px;text-align:center;box-shadow:0 0 10px #ccc;">
+<div class="card">
 
-    <!-- โลโก้โรงเรียน -->
-    <img src="{{ url_for('static', filename='logo.png') }}" width="100">
+    <!-- โลโก้วิทยาลัย -->
+    <img src="{{ url_for('static', filename='images/college_logo.png') }}" class="college-logo">
 
-    <h2>Login</h2>
+    <h2>เข้าสู่ระบบ</h2>
+
+    <div class="subtitle">
+        ยินดีต้อนรับเข้าสู่บทเรียน <b>Microsoft Excel</b><br>
+        ระบบการเรียนออนไลน์<br>
+        วิทยาลัยเทคโนโลยีภูเวียงบัญฑิต(P-BAC)
+    </div>
 
     <form method="POST">
-        <input name="username" placeholder="Username" required style="width:100%;padding:10px;margin:5px"><br>
-        <input name="password" type="password" placeholder="Password" required style="width:100%;padding:10px;margin:5px"><br>
+        <input name="username" placeholder="Username" required>
+        <input name="password" type="password" placeholder="Password" required>
 
-        <button type="submit" style="width:100%;padding:10px;background:#3498db;color:white;border:none;">
-            Login
-        </button>
+        <button type="submit" class="btn login-btn">Login</button>
     </form>
+
+    <a href="{{ url_for('register') }}">
+        <button class="btn register-btn">Register</button>
+    </a>
+
+    <div class="footer">
+        P-BAC Excel Learning System © 2026
+    </div>
 
 </div>
 

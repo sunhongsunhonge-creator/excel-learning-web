@@ -1,6 +1,193 @@
-<h2>Register</h2>
-<form method="POST">
-  <input name="username" placeholder="Username"><br>
-  <input name="password" type="password" placeholder="Password"><br>
-  <button type="submit">Register</button>
-</form>
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>Register - Excel Learning</title>
+
+<style>
+    body{
+        margin:0;
+        font-family:'Segoe UI',Tahoma,sans-serif;
+        background:linear-gradient(135deg,#8b0000,#c40000);
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height:100vh;
+    }
+
+    .card{
+        background:white;
+        padding:35px;
+        width:400px;
+        border-radius:20px;
+        box-shadow:0 25px 50px rgba(0,0,0,0.25);
+        text-align:center;
+        animation:fadeIn 0.6s ease-in-out;
+    }
+
+    @keyframes fadeIn{
+        from{opacity:0;transform:translateY(20px);}
+        to{opacity:1;transform:translateY(0);}
+    }
+
+    .college-logo{
+        width:120px;
+        margin-bottom:15px;
+    }
+
+    h2{
+        margin:5px 0;
+        color:#8b0000;
+    }
+
+    .subtitle{
+        font-size:14px;
+        color:#555;
+        margin-bottom:20px;
+        line-height:1.6;
+    }
+
+    .input-group{
+        position:relative;
+    }
+
+    input{
+        width:100%;
+        padding:12px;
+        margin:8px 0;
+        border-radius:8px;
+        border:1px solid #ddd;
+        outline:none;
+        transition:0.3s;
+    }
+
+    input:focus{
+        border-color:#8b0000;
+        box-shadow:0 0 6px rgba(139,0,0,0.4);
+    }
+
+    .toggle-password{
+        position:absolute;
+        right:12px;
+        top:50%;
+        transform:translateY(-50%);
+        cursor:pointer;
+        font-size:14px;
+        color:#8b0000;
+        user-select:none;
+    }
+
+    .error{
+        color:red;
+        font-size:13px;
+        margin-top:-5px;
+        margin-bottom:5px;
+        display:none;
+    }
+
+    .btn{
+        width:100%;
+        padding:12px;
+        border:none;
+        border-radius:8px;
+        cursor:pointer;
+        font-size:15px;
+        margin-top:10px;
+        transition:0.3s;
+    }
+
+    .register-btn{
+        background:#8b0000;
+        color:white;
+    }
+
+    .register-btn:hover{
+        background:#a80000;
+    }
+
+    .login-btn{
+        background:white;
+        border:2px solid #8b0000;
+        color:#8b0000;
+    }
+
+    .login-btn:hover{
+        background:#8b0000;
+        color:white;
+    }
+
+    .footer{
+        margin-top:15px;
+        font-size:13px;
+        color:#777;
+    }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+    <img src="{{ url_for('static', filename='images/college_logo.png') }}" class="college-logo">
+
+    <h2>สมัครสมาชิก</h2>
+
+    <div class="subtitle">
+        สมัครสมาชิกเพื่อเข้าใช้งานระบบบทเรียน <b>Microsoft Excel</b><br>
+        วิทยาลัยเทคโนโลยีภูเวียงบริหารธุรกิจ
+    </div>
+
+    <form method="POST" onsubmit="return validatePassword()">
+
+        <input name="username" placeholder="Username" required>
+
+        <div class="input-group">
+            <input id="password" name="password" type="password" placeholder="Password" required>
+            <span class="toggle-password" onclick="togglePassword('password')">👁</span>
+        </div>
+
+        <div class="input-group">
+            <input id="confirm_password" name="confirm_password" type="password" placeholder="Confirm Password" required>
+            <span class="toggle-password" onclick="togglePassword('confirm_password')">👁</span>
+        </div>
+
+        <div id="error-message" class="error">
+            ⚠ รหัสผ่านไม่ตรงกัน
+        </div>
+
+        <button type="submit" class="btn register-btn">Register</button>
+
+    </form>
+
+    <a href="{{ url_for('login') }}">
+        <button class="btn login-btn">Back to Login</button>
+    </a>
+
+    <div class="footer">
+        P-BAC Excel Learning System © 2026
+    </div>
+
+</div>
+
+<script>
+function togglePassword(id){
+    const input = document.getElementById(id);
+    input.type = input.type === "password" ? "text" : "password";
+}
+
+function validatePassword(){
+    const pass = document.getElementById("password").value;
+    const confirm = document.getElementById("confirm_password").value;
+    const error = document.getElementById("error-message");
+
+    if(pass !== confirm){
+        error.style.display = "block";
+        return false;
+    }else{
+        error.style.display = "none";
+        return true;
+    }
+}
+</script>
+
+</body>
+</html>
